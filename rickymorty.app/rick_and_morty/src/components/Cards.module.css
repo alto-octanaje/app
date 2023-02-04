@@ -1,0 +1,19 @@
+.styleCards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+    height: 15vh;
+    background-color: #f9ff4f;
+    padding: 1em;
+    margin: 5px;
+    font-weight: 500;
+    border-radius: 5%;
+    transition: 0.7s; 
+    /* tiempo de trancicion */
+  }
+  .listItem:hover {
+    background-color: #3503ffc9;
+    color: beige;
+  }
