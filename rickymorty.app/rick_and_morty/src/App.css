@@ -1,4 +1,11 @@
+*{
+   padding: 0;
+   margin: 0;
+   text-decoration: none;
+}
 .App {
+
    text-align: center;
-   background-color: rgb(202, 57, 57);
+   background:url("https://wallpapercave.com/wp/wp5481652.jpg") ;
+   
 }

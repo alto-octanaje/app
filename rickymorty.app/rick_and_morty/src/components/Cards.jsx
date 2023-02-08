@@ -1,16 +1,16 @@
-import Card from './Card';
-
+import Card from './Card/Card';
+ 
 
 export default function Cards({characters,onClose}) {
   
    return( 
    <div>
       { 
-          characters.map(({id,name,spacies,gender,image}) => {
+          characters.map(({id,name,species,gender,image}) => {
             return <Card 
                key={id}
                name={name}
-               spacies={spacies}
+               species={species}
                gender={gender}
                image={image} 
                onClose={()=>{onClose(id)}}
@@ -18,6 +18,6 @@ export default function Cards({characters,onClose}) {
             />
          })
       }
-   </div>)
-}
+   </div>) 
+} 
 

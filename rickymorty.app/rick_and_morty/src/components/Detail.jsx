@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 
 const  Detail=()=>{
 
-   const {detailId} = useParams();
-   const [ character,setCharacter]=useState({});
+   const {detailId} = useParams(); // buco entre todo los parametros el que nececito "detailId"
+   const [ character,setCharacter]=useState({ }); // el tipo de dato local "{}"
 
-   useEffect(() => {
+   useEffect(() => {       // sumulamos los ciclos de vida 
       fetch(`https://rickandmortyapi.com/api/character/${detailId}`)
         .then((response) => response.json())
         .then((char) => {
@@ -25,10 +27,18 @@ const  Detail=()=>{
     }, [detailId]);
 
    return (
-   <div> 
-       <h5> soy detail </h5>
-       <p> lllegaomos </p>
+   <div > 
+      <div>
+      <button> <Link to="/home" >back</Link> </button>
+        <h2>Detail</h2>
+        <p>{character?.name}</p>
+        <p>{character?.species}</p>
+        <p>{character?.gender}</p>
+        <p>{character?.origin?.name}</p>
+        <img src={character?.image} alt={character.name} />
+      </div>
    </div>)
 }
 
 export default Detail;
+  

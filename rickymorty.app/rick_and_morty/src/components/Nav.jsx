@@ -1,11 +1,11 @@
-//  pagina que se muestra en todo momento y entoda as pestañas
-
+//  pagina que se muestra en todo momento y entoda las pestañas
+import style from "./Nav.module.css";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
 const Nav =({onSearch})=>{
   return(
-    <nav >
+    <nav className={style.Nav} >
         <Link to="about" >About</Link>
         <Link to="home" >Home</Link>
         <SearchBar onSearch={onSearch} />
@@ -13,4 +13,4 @@ const Nav =({onSearch})=>{
   )  
 }
 
-export default Nav;
+export default Nav; 
