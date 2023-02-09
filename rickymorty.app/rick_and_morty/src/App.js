@@ -1,16 +1,39 @@
 import './App.css'
 import Cards from './components/Cards'
 import Nav from './components/Nav'
-import { useState } from 'react'
-
 import About from './components/About';
-import { Routes,Route } from 'react-router-dom';
 import Detail from './components/Detail';
+import From from './components/From/From';  // el formulario vamos amanejar usu funcion userData
+
+import { useEffect, useState } from 'react'
+import { Routes,Route, useLocation, useNavigate } from 'react-router-dom';
+
  
 function App () {
 
-  const [characters,setCharacters]=useState([]);
+  // validacion de usuario
+  const [access , setAccess] = useState(false); // el stado es falso para ingresar
+   const userName = "jei@gmail.com";
+   const passWord = "123asd";
+   const navigate = useNavigate();
 
+   const login = (userData) => { // leenviamos por props fn.login al  From
+    if(userData.username === userName && userData.password === passWord){
+      setAccess(true)
+      navigate('/home'); // es la direccion donde enviamos al usuario
+    } 
+  }
+  
+    useEffect(() => {
+      !access && navigate('/') 
+    },[access,navigate])
+   
+
+// --------------------generar las tarjetas-----------------------------------------
+  //estado local para las tarjetas, llamado a la api y traer personaje 
+  const [characters,setCharacters]=useState([]);
+  const location= useLocation() // es{} propieda pahname /
+  
   const onSearch=(character)=>{
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
 
@@ -44,12 +67,13 @@ function App () {
 
   return (
     <div className='App' style={{ padding: '2px' }}>
-      <Nav onSearch={onSearch} />
-      <Routes>
+      {location.pathname === "/" ? <From  login={login}  /> : <Nav onSearch={onSearch} />  }
+      <Routes>        
         <Route path='/home' element={<Cards onClose={onClose} characters={characters} />}  />
         <Route path='/about' element={<About />} />
         <Route path='/detail/:detailId'  element={<Detail />} />
         <Route path='/detail'  element={<Detail />} />
+
       </Routes>
        
     </div>
@@ -58,3 +82,6 @@ function App () {
 
 export default App
  
+// des pues de hacer el formulario controlado
+// hacemos la validacion d un usuario para ingresar haciendo un estado local con una variable para guardar el email
+// 
