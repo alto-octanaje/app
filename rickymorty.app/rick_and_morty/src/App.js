@@ -3,10 +3,12 @@ import Cards from './components/Cards'
 import Nav from './components/Nav'
 import About from './components/About';
 import Detail from './components/Detail';
-import From from './components/From/From';  // el formulario vamos amanejar usu funcion userData
+import From from './components/From/From';  // el formulario vamos amanejar usan funcion userData
 
 import { useEffect, useState } from 'react'
 import { Routes,Route, useLocation, useNavigate } from 'react-router-dom';
+
+import Favorite from './components/Favorites/favorites';
 
  
 function App () {
@@ -28,7 +30,7 @@ function App () {
       !access && navigate('/') 
     },[access,navigate])
    
-
+ 
 // --------------------generar las tarjetas-----------------------------------------
   //estado local para las tarjetas, llamado a la api y traer personaje 
   const [characters,setCharacters]=useState([]);
@@ -46,7 +48,7 @@ function App () {
             window.alert('ya tienes este personaje');
          }
          }
-         else { alert("no exite ese personaje")}
+         else { alert("no existe ese personaje")}
       })
   }
 // funcion para no poner tarjetas repetidad 
@@ -70,10 +72,10 @@ function App () {
       {location.pathname === "/" ? <From  login={login}  /> : <Nav onSearch={onSearch} />  }
       <Routes>        
         <Route path='/home' element={<Cards onClose={onClose} characters={characters} />}  />
-        <Route path='/about' element={<About />} />
         <Route path='/detail/:detailId'  element={<Detail />} />
         <Route path='/detail'  element={<Detail />} />
-
+        <Route path='/favorite' element={<Favorite />} />
+        <Route path='/about' element={<About />} />
       </Routes>
        
     </div>
@@ -82,6 +84,8 @@ function App () {
 
 export default App
  
-// des pues de hacer el formulario controlado
+// Formulario > despues de hacer el formulario controlado
 // hacemos la validacion d un usuario para ingresar haciendo un estado local con una variable para guardar el email
-// 
+// < Formulario
+// react-redux > aca imortamos y renderizamos la ruta (favorites.js) 
+// en el componente nav debes hacer el Link para que funcione la ruta <react-redux
